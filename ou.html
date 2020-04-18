@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3d模型晨讲</title>
+    <style>
+      /* 样式初始化 */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style: none;
+      }
+      /* 背景图在页面自适应大小 */
+      body {
+        max-width: 100%;
+        min-width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+      }
+      /* 背景图 */
+      .bg {
+        width: 100%;
+        height: 100%;
+        background: url(demo/bg.png);
+        background-size: 100% 100%;
+      }
+      .bg::before {
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        content: "";
+        display: table;
+      }
+      /* 按钮 */
+      #btn {
+        width: 80px;
+        height: 60px;
+        background: url(demo/play.png) center center/60px 60px no-repeat;
+        box-shadow: 0px 0px 20px #54a4fd inset;
+        border-radius: 10px;
+        margin: 30px;
+        cursor: pointer;
+      }
+      /* 存放相册的盒子，用来控制正方体旋转 */
+      .box {
+        height: 500px;
+        width: 500px;
+        /* 使盒子在页面居中 */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -250px;
+        margin-left: -250px;
+        /* 配置3d环境*/
+        transform-style: preserve-3d;
+        /* 给盒子初始化一个3d旋转角度易于查看 */
+        transform: rotateX(-20deg) rotateY(-20deg);
+        /* 最后给盒子添加动画 */
+        animation: photoRotation 20s linear infinite;
+      }
+      /* 盒子中的400px*400px大的正方体的6个面的共有样式 */
+      .maxbox li {
+        height: 400px;
+        width: 400px;
+        /* 使每一面都在盒子中间 */
+        position: absolute;
+        font-size: 200px;
+        line-height: 400px;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        margin-top: -200px;
+        margin-left: -200px;
+        opacity: 0.5;
+        background-size: 100% 100%;
+      }
+      /* 前面一侧 */
+      .maxbox .before {
+        background: url(demo/20.png) 0 0/100% 100%;
+        transform: translateZ(200px);
+      }
+      /* 后面一侧 */
+      .maxbox .after {
+        background: url(demo/21.png) 0 0/100% 100%;
+        transform: translateZ(-200px) rotateY(180deg);
+      }
+      /* 左边一侧 */
+      .maxbox .left {
+        background: url(demo/22.png) 0 0/100% 100%;
+        transform: rotateY(-90deg) translateZ(200px);
+      }
+      /* 右边一侧 */
+      .maxbox .right {
+        background: url(demo/23.png) 0 0/100% 100%;
+        transform: rotateY(90deg) translateZ(200px);
+      }
+      /* 顶部一侧 */
+      .maxbox .top {
+        background: url(demo/24.png) 0 0/100% 100%;
+        transform: rotateX(90deg) translateZ(200px);
+      }
+      /* 底部一侧 */
+      .maxbox .bottom {
+        background: url(demo/25.png) 0 0/100% 100%;
+        transform: rotateX(-90deg) translateZ(200px);
+      }
+
+      /* 盒子中的200px*200px小的正方体的6个面的共有样式 */
+      .minbox li {
+        height: 200px;
+        width: 200px;
+        /* 使每一面都在盒子中间 */
+        position: absolute;
+        font-size: 100px;
+        line-height: 200px;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+        margin-top: -100px;
+        margin-left: -100px;
+        background-size: 100% 100%;
+      }
+      /* 前面一侧 */
+      .minbox .before {
+        background: url(demo/26.png) 0 0/100% 100%;
+        transform: translateZ(100px);
+      }
+      /* 后面一侧 */
+      .minbox .after {
+        background: url(demo/27.png) 0 0/100% 100%;
+        transform: translateZ(-100px) rotateY(180deg);
+      }
+      /* 左边一侧 */
+      .minbox .left {
+        background: url(demo/28.png) 0 0/100% 100%;
+        transform: rotateY(-90deg) translateZ(100px);
+      }
+      /* 右边一侧 */
+      .minbox .right {
+        background: url(demo/29.png) 0 0/100% 100%;
+        transform: rotateY(90deg) translateZ(100px);
+      }
+      /* 顶部一侧 */
+      .minbox .top {
+        background: url(demo/30.png) 0 0/100% 100%;
+        transform: rotateX(90deg) translateZ(100px);
+      }
+      /* 底部一侧 */
+      .minbox .bottom {
+        background: url(demo/31.png) 0 0/100% 100%;
+        transform: rotateX(-90deg) translateZ(100px);
+      }
+
+      /* box触发hover后，外面的大正方体分离,即Z轴再移动100px */
+
+      /* 前面一侧 */
+      .box:hover .maxbox li {
+        opacity: 0.9;
+      }
+      .box:hover .maxbox .before {
+        transform: translateZ(300px);
+      }
+      /* 后面一侧 */
+      .box:hover .maxbox .after {
+        transform: translateZ(-300px) rotateY(180deg);
+      }
+      /* 左边一侧 */
+      .box:hover .maxbox .left {
+        transform: rotateY(-90deg) translateZ(300px);
+      }
+      /* 右边一侧 */
+      .box:hover .maxbox .right {
+        transform: rotateY(90deg) translateZ(300px);
+      }
+      /* 顶部一侧 */
+      .box:hover .maxbox .top {
+        transform: rotateX(90deg) translateZ(300px);
+      }
+      /* 底部一侧 */
+      .box:hover .maxbox .bottom {
+        transform: rotateX(-90deg) translateZ(300px);
+      }
+
+      /* 旋转动画 */
+      @keyframes photoRotation {
+        0% {
+          transform: rotateX(-20deg) rotateY(0deg);
+        }
+        48% {
+          transform: rotateX(-20deg) rotateY(360deg);
+        }
+        52% {
+          transform: rotateX(0deg) rotateY(380deg);
+        }
+        100% {
+          transform: rotateX(360deg) rotateY(380deg);
+        }
+      }
+
+      /* 点击后的外盒子 */
+      /* 前面一侧 */
+      .maxbox .maxbefore {
+        opacity: 0.9;
+        transform: translateZ(300px);
+      }
+      /* 后面一侧 */
+      .maxbox .maxafter {
+        opacity: 0.9;
+        transform: translateZ(-300px) rotateY(180deg);
+      }
+      /* 左边一侧 */
+      .maxbox .maxleft {
+        opacity: 0.9;
+        transform: rotateY(-90deg) translateZ(300px);
+      }
+      /* 右边一侧 */
+      .maxbox .maxright {
+        opacity: 0.9;
+        transform: rotateY(90deg) translateZ(300px);
+      }
+      /* 顶部一侧 */
+      .maxbox .maxtop {
+        opacity: 0.9;
+        transform: rotateX(90deg) translateZ(300px);
+      }
+      /* 底部一侧 */
+      .maxbox .maxbottom {
+        opacity: 0.9;
+        transform: rotateX(-90deg) translateZ(300px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg">
+      <!-- 按钮 -->
+      <div id="btn">
+        <audio src="mp3/2.mp3" loop id="myMusic" volume="0.2"></audio>
+      </div>
+      <!-- 3d相册盒子 -->
+      <div class="box">
+        <!-- 外面的盒子 -->
+        <ul class="maxbox" id="maxbox">
+          <li class="before" id="maxbefore"></li>
+          <li class="after" id="maxafter"></li>
+          <!-- 左右 -->
+          <li class="left" id="maxleft"></li>
+          <li class="right" id="maxright"></li>
+          <!-- 上下 -->
+          <li class="top" id="maxtop"></li>
+          <li class="bottom" id="maxbottom"></li>
+        </ul>
+        <!-- 里面的盒子 -->
+        <ol class="minbox">
+          <!-- 前后 -->
+          <li class="before"></li>
+          <li class="after"></li>
+          <!-- 左右 -->
+          <li class="left"></li>
+          <li class="right"></li>
+          <!-- 上下 -->
+          <li class="top"></li>
+          <li class="bottom"></li>
+        </ol>
+      </div>
+    </div>
+    <!-- 点击音乐播放与外盒子分离 -->
+    <script>
+      var bln = true;
+      btn.onclick = function () {
+        bln = !bln;
+        // 播放一次取反
+        if (!bln) {
+          myMusic.play();
+          btn.style.backgroundImage = "url(demo/pause.png)";
+          //   修改class属性值
+          maxbefore.className = `before maxbefore`;
+          maxafter.className = `after maxafter`;
+          maxleft.className = `left maxleft`;
+          maxright.className = `right maxright`;
+          maxtop.className = `top maxtop`;
+          maxbottom.className = `bottom maxbottom`;
+        } else {
+          myMusic.pause();
+          btn.style.backgroundImage = "url(demo/play.png)";
+          //   修改class属性值
+          maxbefore.className = `before`;
+          maxafter.className = `after`;
+          maxleft.className = `left`;
+          maxright.className = `right`;
+          maxtop.className = `top`;
+          maxbottom.className = `bottom`;
+        }
+      };
+    </script>
+  </body>
+</html>
