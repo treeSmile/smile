@@ -1,0 +1,540 @@
+/* 初始化 */
+body,
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+table,
+td,
+img,
+div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  overflow: hidden;
+  font-family: "微软雅黑";
+}
+
+/* 最外层 */
+.outerNode {
+  width: 400px;
+  height: 650px;
+  border: 1px solid #a6a18d;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #a6a18d;
+  background: url(../img/bg1.jpg);
+  background-size: 400px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -325px;
+  margin-left: -200px;
+}
+
+/* 换肤 */
+.skinNode {
+  margin-top: 3px;
+  height: 32px;
+  width: 292px;
+  position: relative;
+}
+
+.skinNode .skin_show,
+.skin_hide ul .skin_hide_item {
+  float: left;
+  width: 30px;
+  height: 30px;
+  background-image: url(../img/skin.png);
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.skin_hide ul .skin_hide_item {
+  margin-right: 10px;
+}
+
+/* 隱藏的皮肤 */
+.skin_hide {
+  position: absolute;
+  top: 0px;
+  left: 40px;
+  z-index: 9;
+  display: none;
+  padding-left: 10px;
+  border: 1px solid rgba(8, 8, 8, 0.2);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+/* 背景顏色 */
+
+.skin_hide_item:first-child {
+  background-color: #daaeab;
+}
+
+.skin_hide_item:nth-child(2) {
+  background-color: #cec687;
+}
+
+.skin_hide_item:nth-child(3) {
+  background-color: #565e71;
+}
+
+.skin_hide_item:nth-child(4) {
+  background-color: #ba3b34;
+}
+
+.skin_hide_item:nth-child(5) {
+  background-color: #3b8c6b;
+}
+
+.skin_hide_item:last-child {
+  background-color: #875f3b;
+}
+
+/* 音乐歌名 */
+.musicName {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  height: 20px;
+  width: 300px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+/* 里层 */
+.innerNode {
+  width: 400px;
+  height: 555px;
+  margin: 40px 0px 20px;
+}
+
+/* 上面部分 */
+.topNode {
+  width: 400px;
+  height: 430px;
+}
+
+/* 磁条带、背景图盒子 */
+.topBgNode {
+  width: 400px;
+  height: 430px;
+  display: block;
+  opacity: 100%;
+  transition: opacity 1s linear;
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -ms-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+}
+/* 背景图 */
+.top_bg {
+  width: 100%;
+  height: 100%;
+  background: url(../img/disc1.png) no-repeat center;
+  position: relative;
+  cursor: pointer;
+  animation: loop 20s linear infinite forwards;
+  -webkit-animation: loop 20s linear infinite forwards;
+  animation-play-state: paused;
+  -webkit-animation-play-state: paused;
+}
+/* 背景图播放动画 */
+.topBgNode .bg_play {
+  animation-play-state: running;
+  -webkit-animation-play-state: running;
+}
+
+/* 磁带条 */
+.top_bg_line {
+  width: 97px;
+  height: 174px;
+  background: url(../img/pin.png) no-repeat center;
+  position: absolute;
+  top: 50px;
+  left: 190px;
+  z-index: 1;
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+/* 播放时磁带条的动画 */
+.line_on {
+  animation: lineOn 1.5s linear forwards;
+  -webkit-animation: lineOn 1.5s linear forwards;
+}
+
+/* 暂停的播放动画 */
+.line_off {
+  animation: lineOff 0.5s linear forwards;
+  -webkit-animation: lineOff 0.5s linear forwards;
+}
+
+/* 歌词盒子 */
+.titleBgNode {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  cursor: pointer;
+  display: none;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 30%;
+  transition: opacity 1s linear;
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -ms-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+}
+
+/* 歌词背景 */
+.title_bg {
+  width: 400px;
+  height: 400px;
+  background: url(../img/1.jpg);
+  display: block;
+  opacity: 0.4;
+}
+/* 真正的歌词 */
+.trueTitle {
+  width: 400px;
+  height: 362px;
+  position: absolute;
+  top: 20px;
+  left: 0px;
+  overflow: hidden;
+}
+/* 展现出来的歌词 */
+.title_show {
+  width: 340px;
+  height: 400px;
+  padding: 0px 30px;
+  font-size: 16px;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.title_show p {
+  color: #f3efef;
+  margin-bottom: 20px;
+}
+
+/* 歌词文件 */
+.trueTitle_item {
+  display: none;
+}
+
+/* 中间部分样式 */
+.middleNode {
+  height: 50px;
+  font-size: 16px;
+  margin: 0px 20px;
+  color: #eeecec;
+}
+
+.middleNode .lineNode {
+  height: 30px;
+  line-height: 30px;
+}
+/* 当前播放的时间 */
+.nowTime {
+  float: left;
+}
+/* 总时间 */
+.totalTime {
+  float: right;
+}
+
+.nowTime,
+.totalTime {
+  width: 42px;
+  text-align: left;
+}
+/* 进度条盒子 */
+.progressNode {
+  width: 260px;
+  height: 2px;
+  position: absolute;
+  bottom: 130px;
+  left: 70px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.progressNode .showLine {
+  width: 260px;
+  height: 2px;
+  background: rgb(250, 250, 250, 0.5);
+}
+
+/* 真正的进度条 */
+.trueLine {
+  height: 2px;
+  width: 0%;
+  background-color: rgb(250, 250, 250, 0.8);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/* 进度条的圆 */
+.trueLine::before {
+  content: " ";
+  width: 6px;
+  height: 6px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  background: #fff;
+  position: absolute;
+  right: 0px;
+  top: -2px;
+}
+
+/* 下面部分样式 */
+.bottomNode {
+  height: 75px;
+  margin: 0px 20px;
+  position: relative;
+}
+
+.voiceNode,
+.lastNode,
+.playNode,
+.nextNode,
+.songSheet {
+  cursor: pointer;
+}
+
+/* 声音样式 */
+.voiceNode {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  background: url(../img/voice.png) no-repeat center;
+  background-size: 40px;
+}
+
+/* 上一首样式 */
+.lastNode {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 18px;
+  left: 78px;
+  background: url(../img/prev.png) no-repeat center;
+  background-size: 35px;
+}
+
+/* 播放暂停样式 */
+.playNode {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -30px;
+  margin-left: -30px;
+  background: url(../img/play.png) no-repeat center;
+  background-size: 60px;
+}
+
+/* 下一首样式 */
+.nextNode {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 18px;
+  right: 78px;
+  background: url(../img/next.png) no-repeat center;
+  background-size: 35px;
+}
+
+/* 菜单样式 */
+.songSheet {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  background: url(../img/songSheet.png) no-repeat center;
+  background-size: 50px;
+}
+
+/* 隐藏歌单 */
+.songHide {
+  width: 320px;
+  height: 260px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  font-size: 16px;
+  line-height: 2.2em;
+  display: none;
+  z-index: 3;
+  background: rgba(240, 239, 239, 0.8);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.songHide .title {
+  margin-bottom: 20px;
+}
+
+.songHide .title span {
+  color: #757474;
+}
+
+.song_item {
+  color: #000;
+  cursor: pointer;
+}
+
+.song_close {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+
+/* 动画 */
+
+/* 背景图播放动画 */
+@keyframes loop {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+/* 播放时磁带条的动画 */
+@keyframes lineOn {
+  from {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+  }
+
+  to {
+    transform: rotate(-20deg);
+    -webkit-transform: rotate(-20deg);
+    -moz-transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -o-transform: rotate(-20deg);
+  }
+}
+
+/* 暂停的播放动画 */
+@keyframes lineOff {
+  from {
+    transform: rotate(-20deg);
+    -webkit-transform: rotate(-20deg);
+    -moz-transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -o-transform: rotate(-20deg);
+  }
+
+  to {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+  }
+}
